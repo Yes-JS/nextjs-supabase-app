@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI,
+		Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+		Helvetica Neue, sans-serif;
+	height: 100%;
+	width: 100%;
+}
+
+.main {
+	height: 100%;
+	width: 100%;
+	box-sizing: border-box;
+	background: var(--color-surface-light);
+	display: grid;
+	grid-template-rows: max-content 1fr;
+}
+
+[data-nextjs-scroll-focus-boundary] {
+	display: contents;
+}
+
+.mapboxgl-ctrl-bottom-right {
+	display: none !important;
+}
