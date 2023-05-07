@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 
 import "~styles/globals.css";
 
-import { ModeToggle } from "~/components/mode-toggle";
+import { AppHeader } from "~/components/app-header";
 import { ThemeProvider } from "~/components/theme-provider";
 import { Analytics } from "~components/analytics";
 import { TailwindIndicator } from "~components/tailwind-indicator";
@@ -101,9 +101,6 @@ export default async function RootLayout({
 					<Analytics />
 					<Toaster />
 					<TailwindIndicator />
-					<div className="absolute bottom-4 right-4">
-						<ModeToggle />
-					</div>
 				</ThemeProvider>
 			</body>
 		</html>
