@@ -5,10 +5,13 @@ import "~styles/globals.css";
 
 import { ModeToggle } from "~/components/mode-toggle";
 import { ThemeProvider } from "~/components/theme-provider";
+import SupabaseListener from "~/lib/supabase/supabase-listener";
+import SupabaseProvider from "~/lib/supabase/supabase-provider";
 import { Analytics } from "~components/analytics";
 import { TailwindIndicator } from "~components/tailwind-indicator";
 import { Toaster } from "~components/ui/toaster";
 import { siteConfig } from "~config/site";
+import { createServerClient } from "~lib/supabase/supabase-server";
 import { cn } from "~lib/utils";
 
 const fontSans = FontSans({
@@ -82,6 +85,12 @@ export const metadata = {
 export default async function RootLayout({
 	children,
 }: RootLayoutProps) {
+	const supabase = createServerClient();
+
+	const {
+		data: { session },
+	} = await supabase.auth.getSession();
+
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<head />
@@ -97,7 +106,10 @@ export default async function RootLayout({
 					defaultTheme="system"
 					enableSystem
 				>
-					{children}
+					<SupabaseProvider session={session}>
+						{children}
+					</SupabaseProvider>
+
 					<Analytics />
 					<Toaster />
 					<TailwindIndicator />

@@ -2,12 +2,16 @@
 
 import * as React from "react";
 
-import { useSearchParams } from "next/navigation";
+import {
+	useRouter,
+	useSearchParams,
+} from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { useSupabase } from "~/lib/supabase/supabase-provider";
 import { Icons } from "~components/icons";
 import { buttonVariants } from "~components/ui/button";
 import { Input } from "~components/ui/input";
@@ -25,6 +29,8 @@ export function UserAuthForm({
 	className,
 	...props
 }: UserAuthFormProps) {
+	const { supabase, session } = useSupabase();
+	const router = useRouter();
 	const {
 		register,
 		handleSubmit,
@@ -65,6 +71,17 @@ export function UserAuthForm({
 				"We sent you a login link. Be sure to check your spam too.",
 		});
 	}
+
+	const handleGitHubLogin = async () => {
+		const { error } = await supabase.auth.signInWithOAuth({
+			provider: "github",
+			options: { redirectTo: "/" },
+		});
+
+		if (error) {
+			console.log({ error });
+		}
+	};
 
 	return (
 		<div className={cn("grid gap-6", className)} {...props}>
@@ -118,7 +135,7 @@ export function UserAuthForm({
 				)}
 				onClick={() => {
 					setIsGitHubLoading(true);
-					signIn("github");
+					handleGitHubLogin();
 				}}
 				disabled={isLoading || isGitHubLoading}
 			>

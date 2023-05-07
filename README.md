@@ -1,10 +1,14 @@
 ## Start a database
 
-1. Start a docker container with a postgres database.
+1.
+
+- Start a docker container with a postgres database. (compose file is already created in the root dir)
 
 ```sh
 docker compose up
 ```
+
+- Or replace `DATABASE_URL` env veriable with your supabase or planetscale database connection string.
 
 2. Push the schema to database
 
