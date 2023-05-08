@@ -33,7 +33,9 @@
 			"~config/": ["config/"],
 			"~config/*": ["config/*"],
 			"~styles/": ["styles/"],
-			"~styles/*": ["styles/*"]
+			"~styles/*": ["styles/*"],
+			"~assets/": ["assets/"],
+			"~assets/*": ["assets/*"]
 		}
 	},
 	"include": [

@@ -12,11 +12,15 @@ import { cn } from "~lib/utils";
 
 interface MainNavProps {
 	items?: NavItem[];
+	userIsLoggedIn: boolean;
 }
 
-export function MainNav({ items }: MainNavProps) {
+export function MainNav({
+	items,
+	userIsLoggedIn,
+}: MainNavProps) {
 	const pathname = usePathname();
-	console.log(pathname);
+
 	return (
 		<div className="flex gap-6 md:gap-10">
 			<Link
@@ -30,8 +34,15 @@ export function MainNav({ items }: MainNavProps) {
 			</Link>
 			{items?.length ? (
 				<nav className="hidden gap-6 md:flex">
-					{items?.map(
-						(item, index) =>
+					{items?.map((item, index) => {
+						if (
+							item.requiredAuth === true &&
+							!userIsLoggedIn
+						) {
+							return null;
+						}
+
+						return (
 							item.href && (
 								<Link
 									key={index}
@@ -47,7 +58,8 @@ export function MainNav({ items }: MainNavProps) {
 									{item.title}
 								</Link>
 							)
-					)}
+						);
+					})}
 				</nav>
 			) : null}
 		</div>

@@ -15,6 +15,13 @@ export const siteConfig = {
 			title: "Home",
 			href: "/",
 			disabled: false,
+			requiredAuth: false,
+		},
+		{
+			title: "About",
+			href: "/about",
+			disabled: false,
+			requiredAuth: true,
 		},
 	],
 };
