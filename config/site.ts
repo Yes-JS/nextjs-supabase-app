@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-	name: "Bootstrapping",
+	name: "Startupper",
 	description:
 		"An open source application built using the new router, server components and everything new in Next.js 13.",
 	url: "https://tx.shadcn.com",
